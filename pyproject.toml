@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vast-helper"
+version = "0.1.0"
+description = "Provision, connect to, and manage vast.ai GPU instances"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Mukul Ramesh" }]
+keywords = ["vast.ai", "gpu", "cloud", "provisioning", "ssh"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = ["requests>=2.28"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-cov>=5"]
+
+[project.scripts]
+vast-helper = "vast_helper.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/MukulRamesh/vast-helper"
+Repository = "https://github.com/MukulRamesh/vast-helper"
+Issues = "https://github.com/MukulRamesh/vast-helper/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vast_helper = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+markers = [
+    "integration: tests that hit the real vast.ai API (require an API key and network)",
+]
